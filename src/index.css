@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    @apply bg-background text-text dark:bg-secondary dark:text-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-secondary dark:text-white;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply px-4 py-2 text-muted hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-8 text-center dark:text-white;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-lg font-semibold 
+           hover:bg-highlight hover:text-secondary transition-colors duration-300;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 rounded-lg border border-muted focus:border-primary 
+           focus:outline-none transition-colors duration-300 dark:bg-secondary dark:border-gray-600;
+  }
+}
