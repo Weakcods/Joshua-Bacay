@@ -7,7 +7,7 @@ const Contact = () => {
     const formData = new FormData(e.currentTarget as HTMLFormElement);
     
     try {
-        const response = await fetch('/src/php/handle_contact.php', {
+        const response = await fetch('/api/handle_contact', {
             method: 'POST',
             body: formData,
         });
