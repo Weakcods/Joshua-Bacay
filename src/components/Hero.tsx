@@ -34,7 +34,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Hi, I'm <span className="text-primary">Joshua M. Bacay</span>
+          Hi, I'm <span className="text-primary">Joshua Bacay</span>
         </motion.h1>
         <motion.p
           className="text-lg sm:text-xl md:text-2xl text-muted mb-6 sm:mb-8"
@@ -56,7 +56,7 @@ const Hero = () => {
           </a>
           <button 
             onClick={() => window.open('/your-cv.pdf', '_blank')}
-            className="inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3 font-semibold text-primary border-2 border-primary rounded-lg hover:bg-highlight hover:text-secondary hover:border-highlight transition-colors duration-300"
+            className="inline-flex items-center gap-2 px-5 py-4 sm:px-6 sm:py-3 font-semibold text-primary border-2 border-primary rounded-lg hover:bg-highlight hover:text-secondary hover:border-highlight transition-colors duration-300"
           >
             <Download className="w-4 h-4 sm:w-5 sm:h-5" />
             Download CV
