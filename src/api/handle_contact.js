@@ -29,16 +29,16 @@ export default async function handler(req, res) {
         port: 587,
         secure: false,
         auth: {
-            user: 'bacayjhoshuajm@gmail.com',
-            pass: 'J0shu@0012003', // Use environment variables for sensitive data
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
         },
     });
 
     // Send email
     try {
         await transporter.sendMail({
-            from: '"Contact Form" <bacayjhoshuajm@gmail.com>',
-            to: 'bacayjhoshuajm@gmail.com',
+            from: '"Contact Form" <' + process.env.EMAIL_USER + '>',
+            to: process.env.EMAIL_USER,
             subject: 'New Contact Form Submission',
             html: `
                 <h2>New Contact Form Submission</h2>
