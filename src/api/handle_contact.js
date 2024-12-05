@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         secure: false,
         auth: {
             user: 'bacayjhoshuajm@gmail.com',
-            pass: 'J0shu@012003', // Use environment variables for sensitive data
+            pass: 'J0shu@0012003', // Use environment variables for sensitive data
         },
     });
 
