@@ -7,19 +7,20 @@ const Contact = () => {
     const formData = new FormData(e.currentTarget as HTMLFormElement);
     
     try {
-        const response = await fetch('src/components/php/handle_contact.php', { // Corrected the path
+        const response = await fetch('/src/php/handle_contact.php', {
             method: 'POST',
             body: formData,
         });
 
+        const result = await response.text();
         if (response.ok) {
-            const result = await response.text();
-            console.log(result); // Handle success response
+            alert('Message sent successfully!');
+            (e.target as HTMLFormElement).reset();
         } else {
-            console.error('Failed to send message');
+            alert('Failed to send message: ' + result);
         }
     } catch (error) {
-        console.error('Error:', error);
+        alert('Error sending message: ' + (error as Error).message);
     }
   };
 
@@ -32,6 +33,7 @@ const Contact = () => {
             <div>
               <input
                 type="text"
+                name="name"
                 placeholder="Your Name"
                 className="input-field bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                 required
@@ -40,6 +42,7 @@ const Contact = () => {
             <div>
               <input
                 type="email"
+                name="email"
                 placeholder="Your Email"
                 className="input-field bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                 required
@@ -47,6 +50,7 @@ const Contact = () => {
             </div>
             <div>
               <textarea
+                name="message"
                 placeholder="Your Message"
                 rows={5}
                 className="input-field bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
