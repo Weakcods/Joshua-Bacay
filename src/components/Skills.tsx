@@ -1,4 +1,4 @@
-import { Code, Database, Layout, Clock, MessageSquare, Users, ChefHat, Palette, Music, Briefcase, Calendar, Building } from 'lucide-react';
+import { Code, Database, Layout, Clock, MessageSquare, Users, ChefHat, Palette, Music, Briefcase, Calendar, Building, PencilLine  } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Skills = () => {
@@ -14,13 +14,13 @@ const Skills = () => {
       ]
     },
     {
-      category: "Backend Development",
-      icon: <Database className="w-8 h-8 text-primary" />,
+      category: "My Tools",
+      icon: <PencilLine  className="w-8 h-8 text-primary" />,
       skills: [
-        { name: "Node.js", proficiency: 85 },
-        { name: "Python", proficiency: 80 },
-        { name: "SQL", proficiency: 85 },
-        { name: "RESTful APIs", proficiency: 90 }
+        { name: "Figma", proficiency: 85 },
+        { name: "Photoshop", proficiency: 80 },
+        { name: "Framer", proficiency: 75 },
+        { name: "VSCode", proficiency: 90 }
       ]
     },
     {
@@ -173,7 +173,14 @@ const Skills = () => {
                 </h4>
                 <div className="space-y-6">
                   {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="space-y-2">
+                    <motion.div 
+                      key={skillIndex}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: skillIndex * 0.1 }}
+                      viewport={{ once: true }}
+                      className="p-4 rounded-xl shadow-md bg-white hover:shadow-xl transition-all duration-300 border border-gray-100 dark:bg-gray-800 dark:border-gray-700"
+                    >
                       <div className="flex justify-between text-sm font-medium text-gray-600 dark:text-gray-200">
                         <span>{skill.name}</span>
                         <motion.span
@@ -199,7 +206,7 @@ const Skills = () => {
                           className="h-2.5 rounded-full bg-gradient-to-r from-[#FF4E50] to-[#F9D423]"
                         />
                       </motion.div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>

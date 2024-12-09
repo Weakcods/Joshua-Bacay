@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Briefcase, Rocket, Zap } from 'lucide-react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -26,6 +26,25 @@ const About = () => {
       description: 'Obtained certification in Full Stack Development from XYZ Institute.',
       buttonText: 'View Certificate',
     },
+  ];
+
+  // Add new profile details
+  const profileDetails = [
+    {
+      title: "Experience",
+      value: "3+ Years",
+      icon: <Briefcase className="w-6 h-6 mx-auto" />
+    },
+    {
+      title: "Projects",
+      value: "50+",
+      icon: <Rocket className="w-6 h-6 mx-auto" />
+    },
+    {
+      title: "Technologies",
+      value: "15+",
+      icon: <Zap className="w-6 h-6 mx-auto" />
+    }
   ];
 
   const settings = {
@@ -57,25 +76,53 @@ const About = () => {
     <>
       <section id="about" className="py-20 bg-background dark:bg-gray-900 transition-colors duration-300">
         <div className="container mx-auto px-4">
-          <h2 className="section-title text-gray-800 dark:text-gray-100 mb-8">About Me</h2>
-          <div className="max-w-3xl mx-auto">
-            <div className="mb-8 text-center">
-              <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
-                alt="Profile"
-                className="w-48 h-48 rounded-full mx-auto mb-6 object-cover border-4 bg-primary dark:bg-primary"
-              />
-            </div>
-            <div className="space-y-4 text-center">
-              <p className="text-lg text-text dark:text-gray-300">
-                I'm a passionate Full Stack Developer with a strong foundation in modern web technologies.
-                My journey in software development started with a curiosity about how things work on the internet,
-                and has evolved into a professional career building robust web applications.
-              </p>
-              <p className="text-lg text-text dark:text-gray-300">
-                When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
-                or sharing my knowledge through technical blog posts.
-              </p>
+          <h2 className="section-title text-gray-800 dark:text-gray-100 mb-12 text-center">About Me</h2>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-[300px_1fr] gap-12 items-start">
+              {/* Profile Card */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform hover:scale-105 transition-all duration-300">
+                <div className="relative mb-6">
+                  <img
+                    src="/me.jpg"
+                    alt="Profile"
+                    className="w-48 h-48 rounded-full mx-auto object-cover border-4 border-primary"
+                  />
+                  <div className="absolute bottom-0 right-1/3 bg-primary text-white px-4 py-1 rounded-full text-sm">
+                    Available
+                  </div>
+                </div>
+                
+                {/* Quick Stats */}
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                  {profileDetails.map((detail, index) => (
+                    <div key={index} className="text-center">
+                      <div className="text-2xl mb-1">{detail.icon}</div>
+                      <div className="text-xl font-bold text-gray-800 dark:text-gray-100">{detail.value}</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">{detail.title}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* About Content */}
+              <div className="space-y-6">
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Background</h3>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    I'm a passionate Full Stack Developer with a strong foundation in modern web technologies.
+                    My journey in software development started with a curiosity about how things work on the internet,
+                    and has evolved into a professional career building robust web applications.
+                  </p>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">What I Do</h3>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    When I'm not coding, you can find me exploring new technologies, contributing to open-source projects,
+                    or sharing my knowledge through technical blog posts.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
