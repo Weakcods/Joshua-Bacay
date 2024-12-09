@@ -7,10 +7,10 @@ const Skills = () => {
       category: "Frontend Development",
       icon: <Layout className="w-8 h-8 text-primary" />,
       skills: [
-        { name: "React", proficiency: 90 },
-        { name: "TypeScript", proficiency: 85 },
-        { name: "HTML/CSS", proficiency: 95 },
-        { name: "Tailwind CSS", proficiency: 90 }
+        { name: "React", proficiency: 70 },
+        { name: "TypeScript", proficiency: 65 },
+        { name: "HTML/CSS", proficiency: 55 },
+        { name: "Tailwind CSS", proficiency: 40 }
       ]
     },
     {
@@ -18,19 +18,19 @@ const Skills = () => {
       icon: <PencilLine  className="w-8 h-8 text-primary" />,
       skills: [
         { name: "Figma", proficiency: 85 },
-        { name: "Photoshop", proficiency: 80 },
-        { name: "Framer", proficiency: 75 },
-        { name: "VSCode", proficiency: 90 }
+        { name: "Photoshop", proficiency: 45 },
+        { name: "Framer", proficiency: 50 },
+        { name: "VSCode", proficiency: 99 }
       ]
     },
     {
       category: "Programming Languages",
       icon: <Code className="w-8 h-8 text-primary" />,
       skills: [
-        { name: "JavaScript", proficiency: 90 },
-        { name: "Python", proficiency: 80 },
-        { name: "Java", proficiency: 75 },
-        { name: "C++", proficiency: 70 }
+        { name: "HTML/CSS", proficiency: 55 },
+        { name: "Python", proficiency: 48 },
+        { name: "JavaScript", proficiency: 30 },
+        { name: "C#", proficiency: 20 }
       ]
     }
   ];
