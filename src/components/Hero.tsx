@@ -26,8 +26,15 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-12 px-4 bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto text-center">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-12 px-4 bg-gray-50 dark:bg-gray-900 relative">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-1/2 -right-1/2 w-[1000px] h-[1000px] rounded-full bg-gradient-to-br from-primary/20 to-transparent blur-3xl" />
+        <div className="absolute -bottom-1/2 -left-1/2 w-[1000px] h-[1000px] rounded-full bg-gradient-to-tr from-highlight/20 to-transparent blur-3xl" />
+      </div>
+      
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
+      <div className="container mx-auto text-center relative z-10">
         <motion.h1
           className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6"
           initial={{ opacity: 0, y: -50 }}
@@ -42,7 +49,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Full Stack Developer | UI/UX Enthusiast | Problem Solver
+          Front end Developer | UI/UX Enthusiast | Skilled in Design Tools
         </motion.p>
         <motion.div
           className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12"

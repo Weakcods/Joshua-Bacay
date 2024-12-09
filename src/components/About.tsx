@@ -10,21 +10,25 @@ const About = () => {
       title: 'Certified Developer',
       description: 'Obtained certification in Full Stack Development from XYZ Institute.',
       buttonText: 'View Certificate',
+      icon: <Briefcase className="w-6 h-6 text-primary" />,
     },
     {
       title: 'Certified Developer',
       description: 'Obtained certification in Full Stack Development from XYZ Institute.',
       buttonText: 'View Certificate',
+      icon: <Briefcase className="w-6 h-6 text-primary" />,
     },
     {
       title: 'Certified Developer',
       description: 'Obtained certification in Full Stack Development from XYZ Institute.',
       buttonText: 'View Certificate',
+      icon: <Briefcase className="w-6 h-6 text-primary" />,
     },
     {
       title: 'Certified Developer',
       description: 'Obtained certification in Full Stack Development from XYZ Institute.',
       buttonText: 'View Certificate',
+      icon: <Briefcase className="w-6 h-6 text-primary" />,
     },
   ];
 
@@ -135,6 +139,7 @@ const About = () => {
             {achievements.map((achievement, index) => (
               <div key={index} className="px-4">
                 <div className="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex flex-col items-center transition-transform transform hover:scale-105">
+                  <div className="mb-4">{achievement.icon}</div>
                   <h3 className="text-xl font-semibold mb-4 text-secondary dark:text-gray-100">{achievement.title}</h3>
                   <p className="text-center text-muted dark:text-gray-300 mb-6">{achievement.description}</p>
                   <button className="mt-auto bg-primary text-white px-4 py-2 rounded flex items-center hover:bg-highlight hover:text-secondary transition-colors duration-300">
