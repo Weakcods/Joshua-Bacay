@@ -1,34 +1,38 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { ArrowRight, Briefcase, Rocket, Zap } from 'lucide-react';
+import { ArrowRight, Briefcase, Rocket, Zap,ExternalLink,TvMinimal   } from 'lucide-react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const About = () => {
   const achievements = [
     {
-      title: 'Certified Developer',
-      description: 'Obtained certification in Full Stack Development from XYZ Institute.',
+      title: 'Design Matters',
+      description: 'Transforming ideas into impactful UI-UX solutions.',
       buttonText: 'View Certificate',
-      icon: <Briefcase className="w-6 h-6 text-primary" />,
+      link: 'https://drive.google.com/file/d/1mUu5tEs2ol9T0oGuMGgst1-qK_DP05gf/view?usp=sharing',
+      icon: <TvMinimal   className="w-6 h-6 text-primary" />,
     },
     {
-      title: 'Certified Developer',
-      description: 'Obtained certification in Full Stack Development from XYZ Institute.',
+      title: 'AI & Machine Learning',
+      description: 'Shaping the Future of IT" held on the 4th day of October 2024..',
       buttonText: 'View Certificate',
-      icon: <Briefcase className="w-6 h-6 text-primary" />,
+      link: 'https://drive.google.com/file/d/1ZAPSXrLzZotJuBc2AJPAs_RlQi4G9gxI/view?usp=sharing',
+      icon: <TvMinimal   className="w-6 h-6 text-primary" />,
     },
     {
-      title: 'Certified Developer',
-      description: 'Obtained certification in Full Stack Development from XYZ Institute.',
+      title: 'OpenSSF Scorecard',
+      description: ' helps developers & organizations assess security health of open-source projects.',
       buttonText: 'View Certificate',
-      icon: <Briefcase className="w-6 h-6 text-primary" />,
+      link: 'https://drive.google.com/file/d/1zkrR8AlRgAug5vFMQLyrdGAIs-c1ejiV/view?usp=sharing',
+      icon: <TvMinimal   className="w-6 h-6 text-primary" />,
     },
     {
-      title: 'Certified Developer',
-      description: 'Obtained certification in Full Stack Development from XYZ Institute.',
+      title: ' Machine Learning Algorithms',
+      description: 'Solving problems in natural language processingn & predictive analytics.',
       buttonText: 'View Certificate',
-      icon: <Briefcase className="w-6 h-6 text-primary" />,
+      link: 'https://drive.google.com/file/d/1TIMrX0wj3RotPwnETGm-Egu97nvlZi1r/view?usp=sharing',
+      icon: <TvMinimal   className="w-6 h-6 text-primary" />,
     },
   ];
 
@@ -36,12 +40,12 @@ const About = () => {
   const profileDetails = [
     {
       title: "Experience",
-      value: "3+ Years",
+      value: "3+",
       icon: <Briefcase className="w-6 h-6 mx-auto" />
     },
     {
       title: "Projects",
-      value: "50+",
+      value: "5+",
       icon: <Rocket className="w-6 h-6 mx-auto" />
     },
     {
@@ -142,10 +146,15 @@ const About = () => {
                   <div className="mb-4">{achievement.icon}</div>
                   <h3 className="text-xl font-semibold mb-4 text-secondary dark:text-gray-100">{achievement.title}</h3>
                   <p className="text-center text-muted dark:text-gray-300 mb-6">{achievement.description}</p>
-                  <button className="mt-auto bg-primary text-white px-4 py-2 rounded flex items-center hover:bg-highlight hover:text-secondary transition-colors duration-300">
+                  <a 
+                    href={achievement.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto bg-primary text-white px-4 py-2 rounded flex items-center hover:bg-highlight hover:text-secondary transition-colors duration-300"
+                  >
                     {achievement.buttonText}
-                    <ArrowRight size={16} className="ml-2" />
-                  </button>
+                    <ExternalLink  size={16} className="ml-2" />
+                  </a>
                 </div>
               </div>
             ))}
