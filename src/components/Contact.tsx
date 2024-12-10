@@ -1,9 +1,11 @@
 import { Github, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 
 const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    const loadingToast = toast.loading('Sending message...');
     const formData = new FormData(e.currentTarget as HTMLFormElement);
     
     try {
@@ -13,14 +15,17 @@ const Contact = () => {
         });
 
         const result = await response.text();
+        toast.dismiss(loadingToast);
+        
         if (response.ok) {
-            alert('Message sent successfully!');
+            toast.success('Message sent successfully!');
             (e.target as HTMLFormElement).reset();
         } else {
-            alert('Failed to send message: ' + result);
+            toast.error(result || 'Failed to send message');
         }
     } catch (error) {
-        alert('Error sending message: ' + (error as Error).message);
+        toast.dismiss(loadingToast);
+        toast.error('Network error. Please try again later.');
     }
   };
 
