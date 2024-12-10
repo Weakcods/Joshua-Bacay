@@ -47,7 +47,7 @@ const Footer = () => {
             <Instagram className="w-6 h-6" />
           </a>
         </div>
-        <p className="mt-4">© 2024 Juan Tamad. All rights reserved.</p>
+        <p className="mt-4">© 2024 Joshua Bacay. All rights reserved.</p>
       </div>
     </footer>
   );

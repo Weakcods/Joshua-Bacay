@@ -79,7 +79,7 @@ const Skills = () => {
       title: "Senior Frontend Developer",
       company: "Tech Solutions Inc.",
       period: "2021 - Present",
-      description: "Led development of multiple React-based applications, improving performance by 40%. Mentored junior developers and implemented modern frontend practices.",
+      description: "Led the development of several user-friendly React applications, enhancing performance by 40%. Mentored junior developers and adopted modern frontend practices.",
       icon: <Briefcase className="w-8 h-8 text-primary" />,
       type: "Full-time",
       location: "San Francisco, CA"
@@ -142,7 +142,7 @@ const Skills = () => {
                     {experience.type}
                   </span>
                 </div>
-                <p className="text-center text-gray-600 dark:text-gray-400 flex-grow">
+                <p className="text-center text-gray-600 dark:text-gray-400 font-inter">
                   {experience.description}
                 </p>
               </motion.div>

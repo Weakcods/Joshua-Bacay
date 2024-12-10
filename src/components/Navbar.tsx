@@ -3,7 +3,7 @@ import { Menu, X, Moon, Sun, Home, Code, Briefcase, Info, Mail } from 'lucide-re
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [activeSection, setActiveSection] = useState<string>('home');
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Navbar = () => {
       document.documentElement.classList.toggle('dark', savedTheme === 'dark');
     } else {
       // Apply default dark theme if no preference is saved
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add('light');
     }
 
     // Add scroll listener to update active section
@@ -63,7 +63,7 @@ const Navbar = () => {
     <nav className="fixed w-full bg-white/90 dark:bg-secondary/90 backdrop-blur-sm z-50 shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <a href="#home" className="text-xl font-bold text-primary">Portfolio</a>
+          <a href="#home" className="text-xl font-bold text-primary">Josh.dev</a>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
@@ -75,7 +75,7 @@ const Navbar = () => {
                 className={`nav-link flex items-center transition-all duration-300 ease-in-out border-b-2 ${
                   activeSection === item.href.replace('#', '')
                     ? 'border-primary text-primary'
-                    : 'border-transparent hover:border-primary'
+                    : 'border-transparent hover:border-primary hover:transition-all hover:duration-300 hover:ease-in-out'
                 }`}
               >
                 {item.icon}
@@ -128,7 +128,7 @@ const Navbar = () => {
                 className={`block py-2 nav-link flex items-center transition-all duration-300 ease-in-out border-b-2 ${
                   activeSection === item.href.replace('#', '')
                     ? 'border-primary text-primary'
-                    : 'border-transparent hover:border-primary'
+                    : 'border-transparent hover:border-primary hover:transition-all hover:duration-300 hover:ease-in-out'
                 }`}
               >
                 {item.icon}
