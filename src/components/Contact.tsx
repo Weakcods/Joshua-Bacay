@@ -8,36 +8,39 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (isSubmitting) return;
+
+    const errors = {
+      name: !formData.name.trim() && 'Please enter your name',
+      email: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) && 'Please enter a valid email address',
+      message: !formData.message.trim() && 'Please enter a message'
+    };
+
+    const firstError = Object.values(errors).find(Boolean);
+    if (firstError) {
+      toast.error(firstError as string);
+      return;
+    }
+
     setIsSubmitting(true);
     const loadingToast = toast.loading('Sending message...');
 
     try {
       const response = await fetch('/api/handle_contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to send message');
-      }
+      if (!response.ok) throw new Error('Failed to send message');
 
-      const result = await response.json();
-      toast.dismiss(loadingToast);
       toast.success('Message sent successfully!');
       setFormData({ name: '', email: '', message: '' });
-      
     } catch (error) {
       console.error('Error sending message:', error);
-      toast.dismiss(loadingToast);
-      toast.error(error instanceof Error ? error.message : 'Failed to send message. Please try again.');
+      toast.error('Failed to send message. Please try again.');
     } finally {
+      toast.dismiss(loadingToast);
       setIsSubmitting(false);
     }
   };
