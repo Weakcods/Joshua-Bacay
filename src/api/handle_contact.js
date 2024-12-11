@@ -1,54 +1,53 @@
-import nodemailer from 'nodemailer';
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default async function handler(req, res) {
-    // Enable CORS
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-    // Check if it's a POST request
     if (req.method !== 'POST') {
-        return res.status(405).json({ message: 'Method not allowed' });
+        res.status(405).json({ message: 'Method Not Allowed' });
+        return;
     }
 
     const { name, email, message } = req.body;
 
-    // Validate required fields
     if (!name || !email || !message) {
-        return res.status(400).json({ message: 'All fields are required' });
+        res.status(400).json({ message: 'All fields are required.' });
+        return;
     }
 
-    // Validate email
-    if (!/\S+@\S+\.\S+/.test(email)) {
-        return res.status(400).json({ message: 'Invalid email format' });
-    }
-
-    // Create a transporter
-    const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        },
-    });
-
-    // Send email
     try {
-        await transporter.sendMail({
-            from: '"Contact Form" <' + process.env.EMAIL_USER + '>',
-            to: process.env.EMAIL_USER,
-            subject: 'New Contact Form Submission',
-            html: `
-                <h2>New Contact Form Submission</h2>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Message:</strong><br>${message}</p>
-            `,
+        const connection = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME,
+            port: process.env.DB_PORT,
         });
-        return res.status(200).json({ message: 'Message sent successfully!' });
+
+        const [result] = await connection.execute(
+            'INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)',
+            [name, email, message]
+        );
+
+        await connection.end();
+
+        // Forward data to PHP handler
+        const phpResponse = await fetch(process.env.PHP_CONTACT_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, message }),
+        });
+
+        if (!phpResponse.ok) {
+            throw new Error('Failed to send email via PHP handler.');
+        }
+
+        res.status(200).json({ message: 'Message sent successfully!' });
     } catch (error) {
-        return res.status(500).json({ message: 'Failed to send message. Error: ' + error.message });
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Failed to send message.' });
     }
 }

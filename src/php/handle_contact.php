@@ -1,84 +1,56 @@
 <?php
 // Enable CORS
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Headers: Content-Type, Accept");
+header("Access-Control-Allow-Credentials: true");
+
+// If it's a preflight request, end here
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-// Add database connection
-$db_host = 'localhost';
-$db_user = 'your_username';
-$db_pass = 'your_password';
-$db_name = 'your_database_name';
+// Parse JSON input
+$input = json_decode(file_get_contents('php://input'), true);
 
-try {
-    $pdo = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    error_log("Connection failed: " . $e->getMessage());
-    http_response_code(500);
-    echo "Database connection error";
-    exit;
-}
+$name = $input['name'] ?? '';
+$email = $input['email'] ?? '';
+$message = $input['message'] ?? '';
 
-// Check if it's a POST request
-if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    http_response_code(405);
-    echo "Method not allowed";
-    exit;
-}
-
-// Validate required fields
-if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['message'])) {
+// Basic validation
+if (empty($name) || empty($email) || empty($message)) {
     http_response_code(400);
-    echo "Please fill in all required fields";
+    echo "Please fill in all required fields.";
     exit;
 }
 
-// Validate email
-if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
-    echo "Please enter a valid email address";
+    echo "Please provide a valid email address.";
     exit;
 }
 
-// Retrieve form data
-$name = htmlspecialchars($_POST['name']);
-$email = htmlspecialchars($_POST['email']);
-$message = htmlspecialchars($_POST['message']);
-
-// Store in database before sending email
 try {
-    $stmt = $pdo->prepare("INSERT INTO contact_submissions (name, email, message) VALUES (?, ?, ?)");
-    $stmt->execute([$name, $email, $message]);
-} catch(PDOException $e) {
-    error_log("Database error: " . $e->getMessage());
-    http_response_code(500);
-    echo "Error saving your message";
-    exit;
-}
-
-// Create a new PHPMailer instance
-$mail = new PHPMailer(true);
-
-try {
-    //Server settings
+    $mail = new PHPMailer(true);
+    
+    // Server settings
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP host
     $mail->SMTPAuth = true;
-    $mail->Username = 'bacayjhoshuajm@gmail.com';
-    $mail->Password = 'J0shu@012003';
+    $mail->Username = 'your-email@gmail.com'; // Replace with your email
+    $mail->Password = 'your-app-password'; // Replace with your app password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
-    //Recipients
-    $mail->setFrom('bacayjhoshuajm@gmail.com', 'Contact Form'); // Set a fixed from address
-    $mail->addReplyTo($email, $name); // Add reply-to with the sender's email
-    $mail->addAddress('bacayjhoshuajm@gmail.com');
+    // Recipients
+    $mail->setFrom($email, $name);
+    $mail->addAddress('your-email@gmail.com'); // Replace with your email
 
     // Content
     $mail->isHTML(true);
@@ -96,7 +68,6 @@ try {
 } catch (Exception $e) {
     http_response_code(500);
     echo "Sorry, we couldn't send your message. Please try again later.";
-    // Log the actual error for debugging
     error_log("Mailer Error: " . $mail->ErrorInfo);
 }
 ?>
